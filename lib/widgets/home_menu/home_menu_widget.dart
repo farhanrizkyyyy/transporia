@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intransporia/cores/cores.dart';
 import 'package:intransporia/model/home_menu.dart';
 import 'package:intransporia/theme/theme.dart';
 
@@ -18,33 +19,40 @@ class HomeMenuWidget extends StatelessWidget {
         crossAxisCount: 2,
       ),
       itemBuilder: (_, i) {
-        return Column(
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: Constants.borderBase),
-              ),
-              child: Container(
-                margin: const EdgeInsets.all(8.0),
+        return GestureDetector(
+          onTap: () {
+            if (i == 1) {
+              Navigator.pushNamed(context, IntransporiaRoutes.belanjain);
+            }
+          },
+          child: Column(
+            children: [
+              DecoratedBox(
                 decoration: BoxDecoration(
-                  color: items[i].bgColor,
                   borderRadius: BorderRadius.circular(12.0),
+                  border: Border.all(color: Constants.borderBase),
                 ),
-                child: Image.asset(items[i].icon),
+                child: Container(
+                  margin: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: items[i].bgColor,
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Image.asset(items[i].icon),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 6.0),
-              child: Text(
-                items[i].name,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge
-                    ?.copyWith(fontSize: 14.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 6.0),
+                child: Text(
+                  items[i].name,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge
+                      ?.copyWith(fontSize: 14.0),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

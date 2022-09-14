@@ -8,6 +8,9 @@ class IntransporiaRoutes {
   static const String login = '/login';
   static const String laporin = '/laporin';
   static const String belanjain = '/belanjain';
+  static const String belajainCart = '/belanjain/cart';
+  static const String belanjainStasiun = '/belanjain/stasiun';
+  static const String belanjainCategory = '/belanjain/category';
   static const String editAccount = '/editAccount';
   static const String editPhoneNum = '/editPhoneNum';
   static const String otp = '/otp';
