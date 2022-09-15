@@ -14,8 +14,53 @@ class BelanjainHomeScreen extends StatefulWidget {
 }
 
 class _BelanjainHomeScreenState extends State<BelanjainHomeScreen> {
+  final List<String> _categoryAssets = [
+    '',
+    IntransporiaImages.belanjainCategoryElectronic,
+    IntransporiaImages.belanjainCategoryFashion,
+    IntransporiaImages.belanjainCategoryParent,
+    IntransporiaImages.belanjainCategoryFreshProduct,
+    IntransporiaImages.belanjainCategoryFood,
+    IntransporiaImages.belanjainCategoryBeverage,
+    IntransporiaImages.belanjainCategoryHealth
+  ];
+
+  final List<String> _categoryText = [
+    'Semua',
+    'Gadget & Elekronik',
+    'Fashion',
+    'Ibu & Anak',
+    'Produk Segar',
+    'Makanan',
+    'Minuman',
+    'Kesehatan & Kecantikan'
+  ];
+
+  final List<bool> _categoryStatus = [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFFFBFAFF),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
     return SingleChildScrollView(
       padding: EdgeInsets.all(24),
       child: Column(
@@ -142,33 +187,49 @@ class _BelanjainHomeScreenState extends State<BelanjainHomeScreen> {
   }
 
   Widget _buildSearchField() {
-    return Container(
-      width: double.infinity,
-      // height: 50,
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Constants.ink4,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/belanjain/search');
+      },
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 10,
         ),
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(IntransporiaImages.search),
-          SizedBox(width: 16),
-          Flexible(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Mau cari apa?',
-                // hintStyle: TextStyle(fontSize: 12),
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Constants.borderBase,
+          ),
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(IntransporiaImages.search),
+            SizedBox(width: 16),
+            Padding(
+              padding: EdgeInsets.only(bottom: 2),
+              child: Text(
+                'Mau cari apa?',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Constants.ink3,
+                ),
               ),
             ),
-          ),
-        ],
+            // Flexible(
+            //   child: TextField(
+            //     decoration: InputDecoration(
+            //       hintText: 'Mau cari apa?',
+            //       border: InputBorder.none,
+            //       focusedBorder: InputBorder.none,
+            //       errorBorder: InputBorder.none,
+            //       contentPadding: EdgeInsets.zero,
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
@@ -217,26 +278,50 @@ class _BelanjainHomeScreenState extends State<BelanjainHomeScreen> {
       primary: false,
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return _buildCategorySliderItem();
+        return _buildCategorySliderItem(
+          index: index,
+          onPressed: () {
+            setState(() {
+              _categoryStatus[index] = true;
+              for (int i = 0; i < _categoryStatus.length; i++) {
+                if (i != index) {
+                  _categoryStatus[i] = false;
+                }
+              }
+            });
+          },
+          svgUrl: _categoryAssets[index],
+          text: _categoryText[index],
+          isActive: _categoryStatus[index],
+        );
       },
       separatorBuilder: (context, index) => SizedBox(width: 16),
-      itemCount: 10,
+      itemCount: _categoryAssets.length,
     );
   }
 
-  Widget _buildCategorySliderItem() {
-    return GestureDetector(
-      child: Container(
-        width: 142,
-        height: 32,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(60),
-          border: Border.all(
-            color: Constants.orange2,
-          ),
+  Widget _buildCategorySliderItem({
+    required String svgUrl,
+    required String text,
+    Function()? onPressed,
+    required bool isActive,
+    required int index,
+  }) {
+    return ActionChip(
+      label: Text(
+        text,
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
         ),
       ),
+      labelPadding: index == 0 ? EdgeInsets.symmetric(horizontal: 12) : null,
+      elevation: 0,
+      pressElevation: 0,
+      onPressed: onPressed,
+      backgroundColor:
+          isActive ? Color(0xFFF6D5A7).withOpacity(.25) : Colors.white,
+      avatar: index == 0 ? null : SvgPicture.asset(svgUrl),
     );
   }
 
@@ -249,42 +334,59 @@ class _BelanjainHomeScreenState extends State<BelanjainHomeScreen> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       children: List.generate(4, (index) {
-        return _buildGridItem();
+        return _buildGridItem(
+          imageUrl: 'https://via.placeholder.com/150.png',
+          productName: 'Driscoll Blueberry Organik Impor 170g',
+          currentPrice: 'Rp50,000',
+          isDiscounted: true,
+          priceWithoutDiscount: 'Rp152.000',
+        );
       }),
     );
     // return _buildGridItem();
   }
 
-  Widget _buildGridItem() {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: Image.network('https://via.placeholder.com/150.png'),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Driscoll Blueberry Organik Impor 170g',
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
+  Widget _buildGridItem({
+    required String imageUrl,
+    required String productName,
+    bool isDiscounted = false,
+    required String currentPrice,
+    String? priceWithoutDiscount,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/belanjain/detail-product');
+      },
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.network(imageUrl),
             ),
-          ),
-          SizedBox(height: 8),
-          _buildPrice(
-            currentPrice: 'Rp50,000',
-            isDiscounted: true,
-            priceWithoutDiscount: 'Rp152.000',
-          ),
-        ],
+            SizedBox(height: 8),
+            Text(
+              productName,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 8),
+            _buildPrice(
+              currentPrice: currentPrice,
+              isDiscounted: isDiscounted,
+              priceWithoutDiscount: priceWithoutDiscount,
+            ),
+          ],
+        ),
       ),
     );
   }

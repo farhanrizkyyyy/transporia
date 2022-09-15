@@ -47,6 +47,7 @@ class _BelanjainBaseScreenState extends State<BelanjainBaseScreen> {
           fontSize: _selectedIndex == 0 ? 18 : null,
         ),
       ),
+      backButton: _selectedIndex != 0 ? false : true,
       actions: [
         _selectedIndex == 0 ? _buildCartButton() : Container(),
         SizedBox(width: 16),
@@ -107,6 +108,7 @@ class _BelanjainBaseScreenState extends State<BelanjainBaseScreen> {
     final List<String> navbarLabels = ['Beranda', 'Pesanan', 'Riwayat'];
 
     return BottomNavigationBar(
+      backgroundColor: Colors.white,
       currentIndex: _selectedIndex,
       onTap: onIndexChanged,
       items: List.generate(navbarIcons.length, (index) {

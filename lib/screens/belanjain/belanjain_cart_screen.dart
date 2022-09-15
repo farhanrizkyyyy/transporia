@@ -17,6 +17,7 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFBFAFF),
       appBar: _buildAppbar(),
       body: _buildBody(),
     );
@@ -44,10 +45,14 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return _buildCartItem();
+                return _buildCartItem(
+                  imageUrl: 'https://via.placeholder.com/150.png',
+                  productName: 'Driscolls Blueberry Organik Impor 170g',
+                  price: 'Rp52.900',
+                );
               },
               separatorBuilder: (context, index) => SizedBox(height: 20),
-              itemCount: 20,
+              itemCount: 2,
             ),
             SizedBox(height: 24),
             GestureDetector(
@@ -90,7 +95,11 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
     );
   }
 
-  Widget _buildCartItem() {
+  Widget _buildCartItem({
+    required String imageUrl,
+    required String productName,
+    required String price,
+  }) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(10),
@@ -104,11 +113,12 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
       child: Stack(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.network(
-                  'https://via.placeholder.com/150.png',
+                  imageUrl,
                   width: 65,
                   height: 65,
                 ),
@@ -119,7 +129,7 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Driscolls Blueberry Organik Impor 170g',
+                      productName,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black,
@@ -128,7 +138,7 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      'Rp52.900',
+                      price,
                       style: TextStyle(
                         fontSize: 12,
                         color: Constants.orange2,

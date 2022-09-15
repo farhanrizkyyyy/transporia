@@ -21,6 +21,8 @@ class IntransporiaImages {
   static const String logout = 'assets/icons/logout.svg';
   static const String calendar = 'assets/icons/calendar.svg';
   static const String dropdown = 'assets/icons/dropdown.svg';
+  static const String dropdownOrange = 'assets/icons/dropdown_orange.svg';
+  static const String arrowLeftOrange = 'assets/icons/arrow_left_orange.svg';
 
   // Belanjain Icons
   static const String shoppingCart = 'assets/icons/belanjain/cart.svg';
@@ -40,6 +42,22 @@ class IntransporiaImages {
       'assets/icons/belanjain/navbar_history_active.svg';
   static const String stasiunContainerBackground =
       'assets/icons/belanjain/stasiun_container_background.svg';
+  static const String belanjainCategory =
+      'assets/icons/belanjain/belanjain_category_.svg';
+  static const String belanjainCategoryBeverage =
+      'assets/icons/belanjain/belanjain_category_beverage.svg';
+  static const String belanjainCategoryElectronic =
+      'assets/icons/belanjain/belanjain_category_electronic.svg';
+  static const String belanjainCategoryFashion =
+      'assets/icons/belanjain/belanjain_category_fashion.svg';
+  static const String belanjainCategoryFood =
+      'assets/icons/belanjain/belanjain_category_food.svg';
+  static const String belanjainCategoryFreshProduct =
+      'assets/icons/belanjain/belanjain_category_fresh_product.svg';
+  static const String belanjainCategoryHealth =
+      'assets/icons/belanjain/belanjain_category_health.svg';
+  static const String belanjainCategoryParent =
+      'assets/icons/belanjain/belanjain_category_parent.svg';
 
   // Walktrough
   static const String walktrough1 = 'assets/images/walktrough/walktrough1.png';

@@ -13,6 +13,24 @@ class BelanjainStasiunScreen extends StatefulWidget {
 }
 
 class _BelanjainStasiunScreenState extends State<BelanjainStasiunScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    _controller.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,34 +77,85 @@ class _BelanjainStasiunScreenState extends State<BelanjainStasiunScreen> {
   }
 
   Widget _buildTextfield() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Color(0xFFF2F4F5),
-      ),
-      child: Center(
-        child: TextField(
-          style: TextStyle(
-            fontSize: 14,
-          ),
-          decoration: InputDecoration(
-            prefixIcon: Transform.scale(
-              scale: .5,
-              child: SvgPicture.asset(IntransporiaImages.search),
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            // padding: EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xFFF2F4F5),
             ),
-            contentPadding: EdgeInsets.zero,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
+            child: Center(
+              child: TextField(
+                controller: _controller,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+                focusNode: _focusNode,
+                onChanged: (value) {
+                  setState(() {
+                    _controller.text = value;
+                    _controller.selection = TextSelection.collapsed(
+                      offset: _controller.text.length,
+                    );
+                  });
+                },
+                decoration: InputDecoration(
+                  prefixIcon: Transform.scale(
+                    scale: .35,
+                    child: SvgPicture.asset(IntransporiaImages.search),
+                  ),
+                  suffixIcon: _controller.text.isNotEmpty
+                      ? GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _controller.clear();
+                            });
+                          },
+                          child: Transform.scale(
+                            scale: .8,
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.black,
+                            ),
+                          ),
+                        )
+                      : null,
+                  hintText: 'Cari stasiun',
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 15,
+                  ),
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                ),
+              ),
+            ),
           ),
         ),
-      ),
+        _controller.text.isNotEmpty
+            ? Row(
+                children: [
+                  SizedBox(width: 16),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _controller.clear();
+                        _focusNode.unfocus();
+                      });
+                    },
+                    child: Text('Cancel'),
+                  ),
+                ],
+              )
+            : Container(),
+      ],
     );
   }
 
   Widget _buildList() {
     return ListView.separated(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
+      padding: EdgeInsets.fromLTRB(0, 16, 0, 100),
       itemBuilder: (context, index) {
         return _buildItem();
       },
@@ -111,8 +180,14 @@ class _BelanjainStasiunScreenState extends State<BelanjainStasiunScreen> {
   }
 
   Widget _buildCancelButton() {
-    return Material(
-      color: Color(0xFFFBFAFF),
+    return Container(
+      // color: Colors.red,
+      decoration: BoxDecoration(
+        color: Color(0xFFFBFAFF),
+        border: Border(
+          top: BorderSide(color: Color(0xFFF2F4F5)),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 16,
