@@ -65,7 +65,7 @@ class RouteGenerator {
       case IntransporiaRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case IntransporiaRoutes.belanjain:
-        return MaterialPageRoute(builder: (_) => const BelanjainBaseScreen());
+        return MaterialPageRoute(builder: (_) => BelanjainBaseScreen());
       case IntransporiaRoutes.belajainCart:
         return MaterialPageRoute(builder: (_) => const BelanjainCartScreen());
       case IntransporiaRoutes.belanjainStasiun:

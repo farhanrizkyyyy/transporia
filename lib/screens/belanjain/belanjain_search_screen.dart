@@ -3,6 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intransporia/cores/intransporia_assets.dart';
+import 'package:intransporia/screens/belanjain/belanjain_base_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_history_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_home_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_order_screen.dart';
 import 'package:intransporia/theme/constants.dart';
 import 'package:intransporia/widgets/appbars/belanjain_appbar.dart';
 
@@ -14,12 +18,22 @@ class BelanjainSearchScreen extends StatefulWidget {
 }
 
 class _BelanjainSearchScreenState extends State<BelanjainSearchScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    BelanjainHomeScreen(),
+    BelanjainOrderScreen(),
+    BelanjainHistoryScreen()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFBFAFF),
       appBar: _buildAppbar(),
+      // body: _pages.elementAt(_selectedIndex),
       body: _buildBody(),
+      // bottomNavigationBar: _buildBottomNavbar(),
     );
   }
 
@@ -72,15 +86,23 @@ class _BelanjainSearchScreenState extends State<BelanjainSearchScreen> {
   }
 
   Widget _buildBody() {
-    return Column(
+    return Stack(
       children: [
-        Padding(
-          padding: EdgeInsets.all(24),
-          child: _buildSearch(),
+        Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(24),
+              child: _buildSearch(),
+            ),
+            Expanded(
+              child: _buildList(),
+            ),
+          ],
         ),
-        Expanded(
-          child: _buildList(),
-        ),
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: _buildBottomNavbar(),
+        // ),
       ],
     );
   }
@@ -202,5 +224,83 @@ class _BelanjainSearchScreenState extends State<BelanjainSearchScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildBottomNavbar() {
+    final List<String> navbarIcons = [
+      IntransporiaImages.navbarHome,
+      IntransporiaImages.navbarOrder,
+      IntransporiaImages.navbarHistory
+    ];
+
+    final List<String> navbarActiveIcons = [
+      IntransporiaImages.navbarHomeActive,
+      IntransporiaImages.navbarOrderActive,
+      IntransporiaImages.navbarHistoryActive
+    ];
+
+    final List<String> navbarLabels = ['Beranda', 'Pesanan', 'Riwayat'];
+
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      currentIndex: _selectedIndex,
+      onTap: onIndexChanged,
+      items: List.generate(navbarIcons.length, (index) {
+        return BottomNavigationBarItem(
+          icon: Container(
+            padding: index == 0
+                ? EdgeInsets.zero
+                : EdgeInsets.symmetric(vertical: 2),
+            child: index == _selectedIndex
+                ? Padding(
+                    padding: index == 1
+                        ? EdgeInsets.zero
+                        : index == 2
+                            ? EdgeInsets.only(bottom: 1)
+                            : EdgeInsets.symmetric(vertical: 2),
+                    child: SvgPicture.asset(navbarActiveIcons[index]),
+                  )
+                : SvgPicture.asset(navbarIcons[index]),
+          ),
+          label: navbarLabels[index],
+        );
+      }),
+      selectedLabelStyle: TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w500,
+        color: Constants.orange2,
+      ),
+      selectedItemColor: Constants.orange2,
+      selectedIconTheme: IconThemeData(
+        color: Constants.orange2,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w500,
+        color: Constants.orange2,
+      ),
+    );
+  }
+
+  void onIndexChanged(int index) {
+    _selectedIndex = index;
+    Navigator.pop(context);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BelanjainBaseScreen(),
+      ),
+    );
+
+    // Navigator.pushAndRemoveUntil(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => BelanjainBaseScreen(
+    //         // index: 2,
+    //         ),
+    //   ),
+    //   (route) => true,
+    // );
+    // Navigator.of(context).popUntil(ModalRoute.withName('/belanjain'));
   }
 }

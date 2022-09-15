@@ -12,7 +12,7 @@ class BelanjainCartScreen extends StatefulWidget {
 }
 
 class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
-  // List<Widget> _carts = [];
+  final List<int> _cartQtys = [0, 2];
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +46,8 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return _buildCartItem(
+                  index: index,
+                  qty: _cartQtys[index],
                   imageUrl: 'https://via.placeholder.com/150.png',
                   productName: 'Driscolls Blueberry Organik Impor 170g',
                   price: 'Rp52.900',
@@ -99,6 +101,8 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
     required String imageUrl,
     required String productName,
     required String price,
+    required int qty,
+    required int index,
   }) {
     return Container(
       width: double.infinity,
@@ -153,20 +157,34 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
           Positioned(
             bottom: -10,
             right: -10,
-            child: _buildCounter(),
+            child: _buildCounter(
+              index: index,
+              qty: qty,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildCounter() {
+  Widget _buildCounter({
+    required int index,
+    required int qty,
+  }) {
     return Row(
       children: [
         Transform.scale(
           scale: .5,
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                if (_cartQtys[index] == 0) {
+                  _cartQtys[index] = 0;
+                } else {
+                  _cartQtys[index]--;
+                }
+              });
+            },
             child: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -182,7 +200,7 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
         ),
         SizedBox(width: 2),
         Text(
-          '3',
+          '$qty',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -192,7 +210,11 @@ class _BelanjainCartScreenState extends State<BelanjainCartScreen> {
         Transform.scale(
           scale: .5,
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                _cartQtys[index]++;
+              });
+            },
             child: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
