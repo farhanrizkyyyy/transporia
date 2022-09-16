@@ -362,6 +362,14 @@ class _BelanjainHomeScreenState extends State<BelanjainHomeScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(4, 10),
+              // color: Colors.red,
+              color: Color.fromRGBO(232, 234, 238, .25),
+              blurRadius: 5,
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
