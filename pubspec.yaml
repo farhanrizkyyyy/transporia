@@ -41,6 +41,7 @@ flutter:
     - assets/images/logos/
     - assets/images/walktrough/
     - assets/images/banners/
+    - assets/images/qr_test.png
 
   fonts:
     - family: Inter

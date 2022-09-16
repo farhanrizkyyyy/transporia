@@ -42,7 +42,9 @@ class _BelanjainOrderScreenState extends State<BelanjainOrderScreen> {
     required String status,
   }) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, '/belanjain/detail-order');
+      },
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: 24,

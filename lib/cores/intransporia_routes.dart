@@ -13,6 +13,7 @@ class IntransporiaRoutes {
   static const String belanjainCategory = '/belanjain/category';
   static const String belanjainSearch = '/belanjain/search';
   static const String belanjainDetailProduct = '/belanjain/detail-product';
+  static const String belanjainDetailOrder = '/belanjain/detail-order';
   static const String editAccount = '/editAccount';
   static const String editPhoneNum = '/editPhoneNum';
   static const String otp = '/otp';

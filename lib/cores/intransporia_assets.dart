@@ -58,6 +58,10 @@ class IntransporiaImages {
       'assets/icons/belanjain/belanjain_category_health.svg';
   static const String belanjainCategoryParent =
       'assets/icons/belanjain/belanjain_category_parent.svg';
+  static const String belanjainCube =
+      'assets/icons/belanjain/belanjain_cube.svg';
+  static const String belanjainTime =
+      'assets/icons/belanjain/belanjain_time.svg';
 
   // Walktrough
   static const String walktrough1 = 'assets/images/walktrough/walktrough1.png';
@@ -69,4 +73,6 @@ class IntransporiaImages {
   // Main menus
   static const String laporin = 'assets/icons/main_menu/laporin.png';
   static const String belanjain = 'assets/icons/main_menu/belanjain.png';
+
+  static const String qrDummy = 'assets/images/qr_test.png';
 }
