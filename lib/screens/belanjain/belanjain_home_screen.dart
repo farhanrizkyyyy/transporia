@@ -74,6 +74,13 @@ class _BelanjainHomeScreenState extends State<BelanjainHomeScreen> {
           SizedBox(height: 24),
           _buildCategory(),
           SizedBox(height: 20),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, IntransporiaRoutes.belanjainCourier);
+            },
+            child: Text('Courier'),
+          ),
+          SizedBox(height: 20),
           _buildGridview(),
           SizedBox(height: 20),
           Container(

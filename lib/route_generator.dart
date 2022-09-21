@@ -12,6 +12,10 @@ import 'package:intransporia/screens/authentication/register_screen.dart';
 import 'package:intransporia/screens/belanjain/belanjain_base_screen.dart';
 import 'package:intransporia/screens/belanjain/belanjain_cart_screen.dart';
 import 'package:intransporia/screens/belanjain/belanjain_category_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_courier/belanjain_courier_base_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_courier/belanjain_courier_detail_order_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_courier/belanjain_courier_edit_phone_screen.dart';
+import 'package:intransporia/screens/belanjain/belanjain_courier/belanjain_courier_edit_profile_screen.dart';
 import 'package:intransporia/screens/belanjain/belanjain_detail_order_screen.dart';
 import 'package:intransporia/screens/belanjain/belanjain_detail_product_screen.dart';
 import 'package:intransporia/screens/belanjain/belanjain_search_screen.dart';
@@ -83,6 +87,18 @@ class RouteGenerator {
       case IntransporiaRoutes.belanjainDetailOrder:
         return MaterialPageRoute(
             builder: (_) => const BelanjainDetailOrderScreen());
+      case IntransporiaRoutes.belanjainCourier:
+        return MaterialPageRoute(
+            builder: (_) => const BelanjainCourierBaseScreen());
+      case IntransporiaRoutes.belanjainCourierDetailOrder:
+        return MaterialPageRoute(
+            builder: (_) => const BelanjainCourierDetailOrderScreen());
+      case IntransporiaRoutes.belanjainCourierEditPhone:
+        return MaterialPageRoute(
+            builder: (_) => const BelanjainCourierEditPhoneScreen());
+      case IntransporiaRoutes.belanjainCourierEditProfile:
+        return MaterialPageRoute(
+            builder: (_) => const BelanjainCourierEditProfileScreen());
       default:
         return MaterialPageRoute(builder: (_) => Container());
     }

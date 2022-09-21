@@ -16,6 +16,9 @@ class FormWidget extends StatelessWidget {
   final bool readOnly;
   final List<TextInputFormatter>? inputFormatters;
   final String? hintText;
+  final String? initialValue;
+  final int? maxLines;
+  final int? minLines;
 
   const FormWidget({
     Key? key,
@@ -32,6 +35,9 @@ class FormWidget extends StatelessWidget {
     this.readOnly = false,
     this.inputFormatters,
     this.hintText,
+    this.initialValue,
+    this.maxLines,
+    this.minLines,
   }) : super(key: key);
 
   @override
@@ -44,9 +50,12 @@ class FormWidget extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         validator: validator,
+        maxLines: maxLines,
+        minLines: minLines,
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,
         inputFormatters: inputFormatters,
+        initialValue: initialValue,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 15),
           hintText: hintText,

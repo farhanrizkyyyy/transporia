@@ -23,6 +23,8 @@ class IntransporiaImages {
   static const String dropdown = 'assets/icons/dropdown.svg';
   static const String dropdownOrange = 'assets/icons/dropdown_orange.svg';
   static const String arrowLeftOrange = 'assets/icons/arrow_left_orange.svg';
+  static const String camera = 'assets/icons/camera.svg';
+  static const String gallery = 'assets/icons/gallery.svg';
 
   // Belanjain Icons
   static const String shoppingCart = 'assets/icons/belanjain/cart.svg';
@@ -62,6 +64,30 @@ class IntransporiaImages {
       'assets/icons/belanjain/belanjain_cube.svg';
   static const String belanjainTime =
       'assets/icons/belanjain/belanjain_time.svg';
+
+  //Courier
+  static const String courierNavbarHome =
+      'assets/icons/belanjain/courier_navbar_home.svg';
+  static const String courierNavbarOrder =
+      'assets/icons/belanjain/courier_navbar_order.svg';
+  static const String courierNavbarHistory =
+      'assets/icons/belanjain/courier_navbar_history.svg';
+  static const String courierNavbarSetting =
+      'assets/icons/belanjain/courier_navbar_setting.svg';
+  static const String courierNavbarHomeActive =
+      'assets/icons/belanjain/courier_navbar_home_active.svg';
+  static const String courierNavbarOrderActive =
+      'assets/icons/belanjain/courier_navbar_order_active.svg';
+  static const String courierNavbarHistoryActive =
+      'assets/icons/belanjain/courier_navbar_history_active.svg';
+  static const String courierNavbarSettingActive =
+      'assets/icons/belanjain/courier_navbar_setting_active.svg';
+  static const String courierShoppingBag =
+      'assets/icons/belanjain/shopping_bag.svg';
+  static const String courierOrderShoppingBasket =
+      'assets/icons/belanjain/courier_order_shopping_basket.svg';
+  static const String courierLogout =
+      'assets/icons/belanjain/courier_logout.svg';
 
   // Walktrough
   static const String walktrough1 = 'assets/images/walktrough/walktrough1.png';
